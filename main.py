@@ -10,13 +10,13 @@ def m_tts(text_val, language):
 
   
   
-#GUI
+
 st.title("Text to Speech Demos")
 st.markdown("Choose a model to start with")
-tab1, tab2, tab3 = st.tabs(["Google TTS", "Coming Soon", "Coming Soon 2"])
+tab1, tab2, tab3 = st.tabs(["Google TTS", "Speech To Text Pre-Recorded", "Speech To Text Live"])
 
 with tab1:
-  st.subheader("Google Text To Speech")
+  st.subheader("Text To Speech")
   
   st.info("Step 1: Type in your text")
   text_val = st.text_area('Text to convert to speech')
@@ -50,8 +50,8 @@ with tab1:
 
 
 with tab2:
-  st.header("Coming Soon")
+  st.header("Speech To Text Pre-Recorded")
 
 with tab3:
-  st.header("Coming Soon As Well")
+  st.header("Speech To Text Live")
   
