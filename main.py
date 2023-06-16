@@ -10,8 +10,8 @@ tab1, tab2, tab3 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded", "Sp
 
 with tab1:
   def m_tts(text_val, language):
-  obj = gTTS(text=text_val, lang=language, slow=False)  
-  return obj
+    obj = gTTS(text=text_val, lang=language, slow=False)  
+    return obj
 
   st.subheader("Text To Speech")
   
