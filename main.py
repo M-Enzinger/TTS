@@ -21,7 +21,7 @@ with tab1:
   text_val = st.text_area('Text to convert to speech')
   language_option = st.selectbox(
     'To which language to you want to convert to? (more possible)',
-    ('English', 'German', 'French (for whatever reason)', 'Spanish'))
+    ('English', 'German', 'French', 'Spanish'))
   lang_dict = {'English':'en', 'German':'de', 'French':'fr', 'Spanish':'es'}
   language = lang_dict[language_option]
   st.info("Step 2: Press 'Convert To Speech'")
