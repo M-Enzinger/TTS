@@ -48,7 +48,7 @@ with tab1:
 
 
 with tab2:
-  st.header("Speech To Text Pre-Recorded")
+st.header("Speech To Text Pre-Recorded")
   def transcribe_speech(audio_file):
     # Initialize the recognizer
     r = sr.Recognizer()
@@ -66,26 +66,26 @@ with tab2:
     except sr.RequestError as e:
         return f"Could not request results from Google Speech Recognition service: {e}"
 
-   if uploaded_file:
-      st.audio(uploaded_file, format='audio/wav')
+  if uploaded_file:
+    st.audio(uploaded_file, format='audio/wav')
 
-      if st.button("Transcribe"):
-          if uploaded_file.name.endswith(".mp3"):
-              # Convert MP3 to WAV
-              with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as temp_wav:
-                  temp_wav_path = temp_wav.name
-                  audio = pydub.AudioSegment.from_mp3(uploaded_file)
-                  audio.export(temp_wav_path, format="wav")
+    if st.button("Transcribe"):
+        if uploaded_file.name.endswith(".mp3"):
+            # Convert MP3 to WAV
+            with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as temp_wav:
+                temp_wav_path = temp_wav.name
+                audio = pydub.AudioSegment.from_mp3(uploaded_file)
+                audio.export(temp_wav_path, format="wav")
 
-              text_output = transcribe_speech(temp_wav_path)
+            text_output = transcribe_speech(temp_wav_path)
 
-              # Delete temporary WAV file
-              os.remove(temp_wav_path)
-          else:
-              text_output = transcribe_speech(uploaded_file)
+            # Delete temporary WAV file
+            os.remove(temp_wav_path)
+        else:
+            text_output = transcribe_speech(uploaded_file)
 
-          st.write("Transcription:")
-          st.write(text_output)
+        st.write("Transcription:")
+        st.write(text_output)
 
 with tab3:
   st.header("Speech To Text Live")
