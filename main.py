@@ -92,7 +92,7 @@ with tab2:
   st.info("Step 2: Choose a model")
   stt_model_option = st.selectbox(
     "Select you prefered Model (If you need help deciding for a model press 'Help me decide'). Medium & Large are exceeding the cloud ressources.",
-    ('Tiny', 'Base', 'Small'))
+    ('Tiny', 'Base', 'Small'), index=1)
   #converting model selection
   stt_model_dict = {'Tiny':'tiny', 'Base':'base', 'Small':'small'}
   
