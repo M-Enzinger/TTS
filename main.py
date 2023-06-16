@@ -50,13 +50,15 @@ with tab1:
 
     # Play the audio in Streamlit
     st.audio(audio_bytes, format='audio/mp3')
-    
-    st.download_button(
-    label="Download Audio",
-    data=audio_bytes,
-    file_name='Generated_Audio.mp3',
-    mime='mp3',
-    )
+    col1, col2, col3 = st.columns(3)
+    with col2:
+      
+      st.download_button(
+      label="Download Audio",
+      data=audio_bytes,
+      file_name='Generated_Audio.mp3',
+      mime='mp3',
+      )
   elif (execute):
     st.error("Enter Text First!")
 
