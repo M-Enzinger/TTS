@@ -103,5 +103,5 @@ with tab3:
             fp = Path(tmp_file.name)
             fp.write_bytes(uploaded_file2.getvalue())
     result = model.transcribe(tmp_file.name)
-    print(result["text"])
+    st.markdown(result["text"])
   
