@@ -29,24 +29,23 @@ with tab1:
   with col2:
     execute = st.button('Convert to Speech')
   if (execute and (text_val != None)):
-      tts = tts(text_val, language)
-      if (tts is not None):
-        st.success("Success: Listen to your results!")
-        # Save the audio file to a specific path
-        temp_audio = os.path.join(tempfile.gettempdir(), "output.mp3")
-        tts.save(temp_audio)
+    tts = tts(text_val, language)
+    st.success("Success: Listen to your results!")
+    # Save the audio file to a specific path
+    temp_audio = os.path.join(tempfile.gettempdir(), "output.mp3")
+    tts.save(temp_audio)
 
-        # Read the audio file as bytes
-        with open(temp_audio, "rb") as audio_file:
-            audio_bytes = audio_file.read()
+    # Read the audio file as bytes
+    with open(temp_audio, "rb") as audio_file:
+        audio_bytes = audio_file.read()
 
-        # Play the audio in Streamlit
-        st.audio(audio_bytes, format='audio/mp3')
+    # Play the audio in Streamlit
+    st.audio(audio_bytes, format='audio/mp3')
 
-      elif (text_val is None):
-        st.error("Enter Text First!")    
-      else:
-        st.error("Error: result == null :(")
+elif (text_val is None):
+  st.error("Enter Text First!")    
+else:
+  st.error("Error: result == null :(")
 
 
 with tab2:
