@@ -34,6 +34,13 @@ with tab1:
   language_option = st.selectbox(
     'To which language to you want to convert to? (more possible)',
     ('English', 'German', 'French', 'Spanish'))
+  
+  #Adding disclaimer
+  if (language_option == 'English'):
+    text_val += "I know my voice doesn't sound perfect yet. I am just a demo, in the future i will be replaced by a better voice!"
+  elif (language_option == 'Germ'):
+    text_val += "Ich weiß, dass meine Stimme noch nicht perfekt klingt. Ich bin nur eine Demo, in Zukunft werde ich durch eine bessere Stimme ersetzt werden!"
+  
   #converting language selection
   lang_dict = {'English':'en', 'German':'de', 'French':'fr', 'Spanish':'es'}
   language = lang_dict[language_option]
