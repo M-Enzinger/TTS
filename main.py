@@ -1,5 +1,5 @@
 from gtts import gTTS
-import streamlit
+import streamlit as st
 
 def tts(text_val, language):
   obj = gTTS(text=text_val, lang=language, slow=False)  
