@@ -27,7 +27,7 @@ with tab1:
   #users text input
   st.subheader("Text To Speech")
   st.info("Step 1: Type in your text")
-  text_val = st.text_area('Text to convert to speech')
+  text_val = st.text_area('Text to convert to speech') + '.'
   
   #user selects language
   st.info("Step 2: Choose your language")
@@ -37,9 +37,9 @@ with tab1:
   
   #Adding disclaimer
   if (language_option == 'English'):
-    text_val += ",. I know my voice doesn't sound perfect yet. I am just a demo. In the future, Max will replace me with a better voice!"
+    text_val += "I know my voice doesn't sound perfect yet. I am just a demo. In the future, Max will replace me with a better voice!"
   elif (language_option == 'German'):
-    text_val += ",. Ich weiß, dass meine Stimme noch nicht perfekt klingt. Ich bin nur eine Demo. In Zukunft wird Max mich durch eine bessere Stimme ersetzten!"
+    text_val += "Ich weiß, dass meine Stimme noch nicht perfekt klingt. Ich bin nur eine Demo. In Zukunft wird Max mich durch eine bessere Stimme ersetzten!"
   
   #converting language selection
   lang_dict = {'English':'en', 'German':'de', 'French':'fr', 'Spanish':'es'}
