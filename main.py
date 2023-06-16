@@ -5,12 +5,13 @@ import os
 import speech_recognition as sr
 from pydub import AudioSegment
 import ffmpeg
+import whisper
 
 
 
 st.title("TTS & STT Demos")
 st.markdown("Choose what you want to do:")
-tab1, tab2, tab3 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded", "Speech To Text Live"])
+tab1, tab2, tab3 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded", "Speech To Text Pre-Recorded 2"])
 
 with tab1:
   def m_tts(text_val, language):
@@ -90,5 +91,9 @@ with tab2:
           st.write(text_output)
 
 with tab3:
-  st.header("Speech To Text Live")
+  st.header("Speech To Text Pre-Recorded 2")
+  model = whisper.load_model("base")
+  uploaded_file = st.file_uploader("Upload an audio file", type=["wav", "mp3"])
+  result = model.transcribe(uploaded_file)
+  print(result["text"])
   
