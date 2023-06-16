@@ -52,27 +52,27 @@ with tab1:
 
 with tab2:
   def transcribe_speech(audio_file):
-    # Initialize the recognizer
-    r = sr.Recognizer()
+      # Initialize the recognizer
+      r = sr.Recognizer()
 
-    # Load the audio file with pydub
-    audio = AudioSegment.from_file(audio_file)
+      # Load the audio file with pydub
+      audio = AudioSegment.from_file(audio_file)
 
-    # Export the audio as WAV to a temporary file
-    temp_wav_path = "/path/to/temp.wav"
-    audio.export(temp_wav_path, format="wav")
+      # Export the audio as WAV to a temporary file
+      temp_wav_path = os.path.join(tempfile.gettempdir(), "temp.wav")
+      audio.export(temp_wav_path, format="wav")
 
-    # Perform speech recognition
-    try:
-        with sr.AudioFile(temp_wav_path) as source:
-            # Read the entire audio file
-            audio_data = r.record(source)
-            text = r.recognize_google(audio_data)
-        return text
-    except sr.UnknownValueError:
-        return "Speech recognition could not understand audio"
-    except sr.RequestError as e:
-        return f"Could not request results from Google Speech Recognition service: {e}"
+      # Perform speech recognition
+      try:
+          with sr.AudioFile(temp_wav_path) as source:
+              # Read the entire audio file
+              audio_data = r.record(source)
+              text = r.recognize_google(audio_data)
+          return text
+      except sr.UnknownValueError:
+          return "Speech recognition could not understand audio"
+      except sr.RequestError as e:
+          return f"Could not request results from Google Speech Recognition service: {e}"
 
   # Streamlit app
   st.title("Speech-to-Text with pydub and SpeechRecognition")
