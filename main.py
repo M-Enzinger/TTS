@@ -82,16 +82,17 @@ with tab2:
   #user chooses model
   st.info("Step 2: Choose a model")
   stt_model_option = st.selectbox(
-    "Select you prefered Model (If you need help deciding for a model press 'Help me decide')",
-    ('Tiny', 'Base', 'Small', 'Medium'))
+    "Select you prefered Model (If you need help deciding for a model press 'Help me decide'). Medium & Large are exceeding the cloud ressources.",
+    ('Tiny', 'Base', 'Small'))
   #converting model selection
-  stt_model_dict = {'Tiny':'tiny', 'Base':'base', 'Small':'small', 'Medium':'medium'}
+  stt_model_dict = {'Tiny':'tiny', 'Base':'base', 'Small':'small'}
   
   #offer help to  decide for a model
   col1, col2, col3 = st.columns(3)
   with col2:
     if st.button('Help me decide'):
-      image = Image.open('files/help_me_decide_model.jpg')
+      image_models = Image.open('files/help_me_decide_model.jpg')
+      st.image(image_models, caption='Source: https://github.com/openai/whisper')
       
   #execution button
   st.info("Step 3: Click 'Transcribe'")
