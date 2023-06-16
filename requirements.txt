@@ -5,3 +5,4 @@ pydub
 ffmpeg-python
 pocketsphinx
 openai-whisper
+soundfile
