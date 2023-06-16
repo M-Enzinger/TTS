@@ -5,6 +5,7 @@ import os
 import speech_recognition as sr
 from pydub import AudioSegment
 import ffmpeg
+import numpy as np
 import whisper
 
 
