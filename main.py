@@ -65,7 +65,7 @@ with tab1:
 
 with tab2:
   st.subheader("Speech To Text Pre-Recorded")
-  st.info("Step 1: Upload a recorded audio file; You can also download the file you generated in the 'Text To Speech' tab!")
+  st.info("Step 1: Upload a recorded audio file; You can also upload the file you generated in the 'Text To Speech' tab before!")
   uploaded_file2 = st.file_uploader("Upload an audio file2", type=["wav", "mp3"])
   st.info("Step 2: Choose a model")
   model_option = st.selectbox(
