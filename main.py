@@ -99,7 +99,7 @@ with tab2:
   #offer help to  decide for a model
   col1, col2, col3 = st.columns(3)
   with col2:
-    help_me_decide_button = st.button('Help me decide'):
+    help_me_decide_button = st.button('Help me decide')
   if help_me_decide_button:
     image_models = Image.open('files/help_me_decide_model.jpg')
     st.image(image_models, caption='Source: https://github.com/openai/whisper')
