@@ -14,7 +14,7 @@ from pathlib import Path
 
 st.title("TTS & STT Demos")
 st.markdown("Choose what you want to do:")
-tab1, tab2, tab3 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded", "Speech To Text Pre-Recorded 2"])
+tab1, tab2, tab3 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded", "Speech To Text Live"])
 
 with tab1:
   def m_tts(text_val, language):
@@ -55,45 +55,6 @@ with tab1:
 
 
 with tab2:
-  def transcribe_speech(audio_file):
-      # Initialize the recognizer
-      r = sr.Recognizer()
-
-      # Load the audio file with pydub
-      audio = AudioSegment.from_file(audio_file)
-
-      # Export the audio as WAV to a temporary file
-      temp_wav_path = os.path.join(tempfile.gettempdir(), "temp.wav")
-      audio.export(temp_wav_path, format="wav")
-
-      # Perform speech recognition
-      try:
-          with sr.AudioFile(temp_wav_path) as source:
-              # Read the entire audio file
-              audio_data = r.record(source)
-              text = r.recognize_sphinx(audio_data)
-          return text
-      except sr.UnknownValueError:
-          return "Speech recognition could not understand audio"
-      except sr.RequestError as e:
-          return f"Could not request results from Google Speech Recognition service: {e}"
-
-  # Streamlit app
-  st.title("Speech-to-Text with pydub and SpeechRecognition")
-
-  # Audio file upload
-  uploaded_file = st.file_uploader("Upload an audio file", type=["wav", "mp3"], accept_multiple_files=False)
-
-  # Perform speech-to-text conversion and display the result
-  if uploaded_file:
-      st.audio(uploaded_file, format='audio/wav')
-
-      if st.button("Transcribe"):
-          text_output = transcribe_speech(uploaded_file)
-          st.write("Transcription:")
-          st.write(text_output)
-
-with tab3:
   st.header("Speech To Text Pre-Recorded 2")
   model = whisper.load_model("base")
   uploaded_file2 = st.file_uploader("Upload an audio file2", type=["wav", "mp3"])
@@ -104,4 +65,58 @@ with tab3:
             fp.write_bytes(uploaded_file2.getvalue())
     result = model.transcribe(tmp_file.name)
     st.markdown(result["text"])
+    
+with tab3:
+  st.header("Speech To Text Live")
+  def transcribe_audio(audio_file):
+    model = whisper.load_model("base")
+    result = model.transcribe(audio_file)
+    return result["text"]
+
+  def main():
+      st.header("Speech To Text Live")
+
+      uploaded_file2 = st.file_uploader("Upload an audio file", type=["wav", "mp3"])
+
+      if uploaded_file2 is not None:
+          audio_file = tempfile.NamedTemporaryFile(delete=False)
+          audio_file.write(uploaded_file2.getvalue())
+          audio_file.close()
+
+      if uploaded_file2 is not None:
+          st.audio(uploaded_file2)
+
+          webrtc_ctx = webrtc_streamer(
+              key="example",
+              audio=False,
+              video=False,
+              client_settings={"is_streamlit_server": True},
+          )
+
+          if webrtc_ctx.audio_receiver:
+              audio_receiver = webrtc_ctx.audio_receiver
+              audio_file_path = Path(audio_file.name)
+
+              with audio_file_path.open("rb") as f:
+                  audio_content = f.read()
+
+              audio_receiver.process_audio(audio_content)
+
+              st.text("Transcription in progress:")
+              st.empty()
+
+              while True:
+                  data = audio_receiver.get_intermediate_text()
+                  if data:
+                      st.text(data)
+
+                  if not audio_receiver.more_data():
+                      break
+
+          if webrtc_ctx.state.playing:
+              st.text("Transcription complete!")
+
+  if __name__ == "__main__":
+      main()
+  
   
