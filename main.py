@@ -40,6 +40,7 @@ with tab1:
     text_val += ". I know my voice doesn't sound perfect yet. I am just a demo. In the future, Max will replace me with a better voice!"
   elif (language_option == 'German'):
     text_val += ". Ich weiß, dass meine Stimme noch nicht perfekt klingt. Ich bin nur eine Demo. In Zukunft wird Max mich durch eine bessere Stimme ersetzten!"
+    st.markdown(text_val)
   
   #converting language selection
   lang_dict = {'English':'en', 'German':'de', 'French':'fr', 'Spanish':'es'}
@@ -92,7 +93,7 @@ with tab2:
   st.info("Step 2: Choose a model")
   stt_model_option = st.selectbox(
     "Select you prefered Model (If you need help deciding for a model press 'Help me decide'). Small, Medium & Large are exceeding the free cloud ressources.",
-    ('Tiny', 'Base', 'Small'), index=1)
+    ('Tiny', 'Base'), index=1)
   #converting model selection
   stt_model_dict = {'Tiny':'tiny', 'Base':'base'}
   
