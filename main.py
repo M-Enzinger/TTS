@@ -11,7 +11,7 @@ def m_tts(text_val, language):
   
   
 #GUI
-st.header("Text to Speech Demos")
+st.title("Text to Speech Demos")
 st.markdown("Choose a model to start with")
 tab1, tab2, tab3 = st.tabs(["Google TTS", "Coming Soon", "Coming Soon 2"])
 
