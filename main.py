@@ -59,6 +59,7 @@ with tab1:
     
     #Save the audio file to a specific path
     tts_temp_audio = os.path.join(tempfile.gettempdir(), "output.mp3")
+    st.success("Success: Listen to your results or download it as a mp3! You can edit your text and click on the button again to convert a new text.")
     tts.save(tts_temp_audio)
 
     #Read the audio file as bytes
