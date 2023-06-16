@@ -4,7 +4,10 @@ import tempfile
 import os
 
 def tts(text_val, language):
-  obj = gTTS(text=text_val, lang=language, slow=False)  
+  if (text_val != None):
+    obj = gTTS(text=text_val, lang=language, slow=False)  
+  else:
+    st.error("Enter Text First!")
   return obj
 
 
@@ -27,10 +30,8 @@ with tab1:
   st.info("Step 2: Press 'Convert To Speech'")
   col1, col2, col3 = st.columns(3)
   with col2:
-    execute = st.button('Convert to Speech')
-  if (execute and (text_val == None)):
-    st.error("Enter Text First!")   
-  elif (execute):
+    execute = st.button('Convert to Speech')   
+  if (execute):
     tts = tts(text_val, language)
     st.success("Success: Listen to your results!")
     # Save the audio file to a specific path
