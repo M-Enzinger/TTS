@@ -11,9 +11,9 @@ def m_tts(text_val, language):
   
   
 
-st.title("Text to Speech Demos")
-st.markdown("Choose a model to start with")
-tab1, tab2, tab3 = st.tabs(["Google TTS", "Speech To Text Pre-Recorded", "Speech To Text Live"])
+st.title("TTS & STT Demos")
+st.markdown("Choose what you want to do:")
+tab1, tab2, tab3 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded", "Speech To Text Live"])
 
 with tab1:
   st.subheader("Text To Speech")
