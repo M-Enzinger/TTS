@@ -21,7 +21,8 @@ tab1, tab2, tab3 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded", "My
 with tab1:
   #Text to Speech-object function
   def m_tts(text_val, language):
-    obj = gTTS(text=text_val, lang=language, slow=False)  
+    obj = gTTS(text=text_val, lang=language, slow=False)
+    st.success("Success: Listen to your results or download it as a mp3! You can edit your text and click on the button again to convert a new text.")
     return obj
 
   #users text input
@@ -55,11 +56,9 @@ with tab1:
   if (execute_tts and (len(text_val) >= 1)):
     #calling text to speech function
     tts = m_tts(text_val, language)
-    st.success("Success: Listen to your results or download it as a mp3! You can edit your text and click on the button again to convert a new text.")
     
     #Save the audio file to a specific path
     tts_temp_audio = os.path.join(tempfile.gettempdir(), "output.mp3")
-    st.success("Success: Listen to your results or download it as a mp3! You can edit your text and click on the button again to convert a new text.")
     tts.save(tts_temp_audio)
 
     #Read the audio file as bytes
