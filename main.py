@@ -27,7 +27,8 @@ with tab1:
   st.info("Step 2: Press 'Convert To Speech'")
   col1, col2, col3 = st.columns(3)
   with col2:
-    if st.button('Convert to Speech'):
+    execute = st.button('Convert to Speech'):
+  if execute:
       tts = tts(text_val, language)
       if (tts is not None):
         st.success("Success: Listen to your results!")
