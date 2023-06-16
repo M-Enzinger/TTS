@@ -22,7 +22,7 @@ with tab1:
   st.info("Step 2: Press 'Convert To Speech'")
   if st.button('Convert to Speech'):
     tts = tts(text_val, language)
-    if (result is not None):
+    if (tts is not None):
       st.success("Success: Listen to your results!")
       # Save the audio file to a specific path
       temp_audio = os.path.join(tempfile.gettempdir(), "output.mp3")
