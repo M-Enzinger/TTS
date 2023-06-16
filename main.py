@@ -3,11 +3,8 @@ import streamlit as st
 import tempfile
 import os
 
-def tts(text_val, language):
-  if (text_val != None):
-    obj = gTTS(text=text_val, lang=language, slow=False)  
-  else:
-    st.error("Enter Text First!")
+def m_tts(text_val, language):
+  obj = gTTS(text=text_val, lang=language, slow=False)  
   return obj
 
 
@@ -31,8 +28,8 @@ with tab1:
   col1, col2, col3 = st.columns(3)
   with col2:
     execute = st.button('Convert to Speech')   
-  if (execute):
-    tts = tts(text_val, language)
+  if (execute and (text_val != None):
+    tts = m_tts(text_val, language)
     st.success("Success: Listen to your results!")
     # Save the audio file to a specific path
     temp_audio = os.path.join(tempfile.gettempdir(), "output.mp3")
@@ -44,6 +41,8 @@ with tab1:
 
     # Play the audio in Streamlit
     st.audio(audio_bytes, format='audio/mp3')
+  elif (execute):
+    st.error("Enter Text First!")
 
 
 with tab2:
