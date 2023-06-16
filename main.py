@@ -96,7 +96,7 @@ with tab3:
   uploaded_file2 = st.file_uploader("Upload an audio file2", type=["wav", "mp3"])
   execute_stt = st.button("Transcribe")
   if execute_stt:
-    audio_array = np.arrayuploaded_file2)
+    audio_array = np.array(uploaded_file2)
     result = model.transcribe(audio_array)
     print(result["text"])
   
