@@ -30,7 +30,7 @@ with tab1:
     execute = st.button('Convert to Speech')
   if (execute and (text_val == None)):
     st.error("Enter Text First!")   
-  elif (execute and (text_val != None)):
+  elif (execute):
     tts = tts(text_val, language)
     st.success("Success: Listen to your results!")
     # Save the audio file to a specific path
