@@ -22,8 +22,8 @@ with tab1:
     if (result is not None):
       st.success("Success: Listen to your results!")
       #playing the audio
-      audio_file = open('myaudio.ogg', 'rb')
-      audio_bytes = audio_file.read()
+      #audio_file = open('myaudio.ogg', 'rb')
+      #audio_bytes = audio_file.read()
       st.audio(result, format='audio/ogg')
     
     elif (text_val is None):
