@@ -28,7 +28,9 @@ with tab1:
   col1, col2, col3 = st.columns(3)
   with col2:
     execute = st.button('Convert to Speech')
-  if (execute and (text_val != None)):
+  if (execute and (text_val == None)):
+    st.error("Enter Text First!")   
+  elif (execute and (text_val != None)):
     tts = tts(text_val, language)
     st.success("Success: Listen to your results!")
     # Save the audio file to a specific path
@@ -41,9 +43,6 @@ with tab1:
 
     # Play the audio in Streamlit
     st.audio(audio_bytes, format='audio/mp3')
-
-  elif (text_val is None):
-    st.error("Enter Text First!")    
 
 
 with tab2:
