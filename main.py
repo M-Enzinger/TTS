@@ -2,20 +2,17 @@ from gtts import gTTS
 import streamlit as st
 import tempfile
 import os
-
-def m_tts(text_val, language):
-  obj = gTTS(text=text_val, lang=language, slow=False)  
-  return obj
-
-
-  
-  
+import speech_recognition as sr
 
 st.title("TTS & STT Demos")
 st.markdown("Choose what you want to do:")
 tab1, tab2, tab3 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded", "Speech To Text Live"])
 
 with tab1:
+  def m_tts(text_val, language):
+  obj = gTTS(text=text_val, lang=language, slow=False)  
+  return obj
+
   st.subheader("Text To Speech")
   
   st.info("Step 1: Type in your text")
@@ -51,6 +48,37 @@ with tab1:
 
 with tab2:
   st.header("Speech To Text Pre-Recorded")
+  def transcribe_speech(audio_file):
+    # Initialize the recognizer
+    r = sr.Recognizer()
+
+    # Load the audio file
+    with sr.AudioFile(audio_file) as source:
+        audio = r.record(source)
+
+    # Perform speech recognition
+    try:
+        text = r.recognize_google(audio)
+        return text
+    except sr.UnknownValueError:
+        return "Speech recognition could not understand audio"
+    except sr.RequestError as e:
+        return f"Could not request results from Google Speech Recognition service: {e}"
+
+  # Streamlit app
+  st.title("Speech-to-Text with SpeechRecognition")
+
+  # Audio file upload
+  uploaded_file = st.file_uploader("Upload an audio file", type=["wav", "mp3"])
+
+  # Perform speech-to-text conversion and display the result
+  if uploaded_file:
+      st.audio(uploaded_file, format='audio/wav')
+
+      if st.button("Transcribe"):
+          text_output = transcribe_speech(uploaded_file)
+          st.write("Transcription:")
+          st.write(text_output)
 
 with tab3:
   st.header("Speech To Text Live")
