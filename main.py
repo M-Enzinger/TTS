@@ -39,7 +39,7 @@ with tab1:
     execute = st.button('Convert to Speech')   
   if (execute and (len(text_val) >= 1)):
     tts = m_tts(text_val, language)
-    st.success("Success: Listen to your results!")
+    st.success("Success: Listen to your results or download it as a mp3!")
     # Save the audio file to a specific path
     temp_audio = os.path.join(tempfile.gettempdir(), "output.mp3")
     tts.save(temp_audio)
