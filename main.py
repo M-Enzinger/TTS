@@ -130,7 +130,7 @@ with tab2:
 
 with tab3:
   st.subheader("My Code")
-  st.code("from gtts import gTTS
+  st.code(""from gtts import gTTS
 import streamlit as st
 import tempfile
 import os
@@ -258,7 +258,7 @@ with tab2:
     #returning results to user
     st.success("Success! Upload a new file and/or change the model and hit 'Transribe' again for a new prediction!")
     st.markdown(stt_result["text"])  
-  ")
+  "")
     
  
       
