@@ -87,7 +87,7 @@ with tab2:
     model = whisper.load_model(model_dict[model_option])
     result = model.transcribe(tmp_file.name)
     st.success("Success! Here is your result:")
-    st.code(result["text"])
+    st.markdown(result["text"])
     
 
     
