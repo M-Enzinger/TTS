@@ -6,7 +6,8 @@ import speech_recognition as sr
 from pydub import AudioSegment
 import ffmpeg
 import numpy as np
-import whisper
+import whispe
+import soundfile as sf
 
 
 
@@ -97,7 +98,9 @@ with tab3:
   uploaded_file2 = st.file_uploader("Upload an audio file2", type=["wav", "mp3"])
   execute_stt = st.button("Transcribe")
   if execute_stt:
-    audio_array = np.array(uploaded_file2)
+    audio_data, sample_rate = sf.read(uploaded_file2)
+    # Convert the audio data to a NumPy array
+    audio_array = np.array(audio_data)
     result = model.transcribe(audio_array)
     print(result["text"])
   
