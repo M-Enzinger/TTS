@@ -3,7 +3,7 @@ import streamlit as st
 import tempfile
 import os
 import speech_recognition as sr
-import pydub
+from pydub import AudioSegment
 from ffprobe import FFProbe
 
 
