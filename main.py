@@ -67,7 +67,7 @@ with tab2:
           with sr.AudioFile(temp_wav_path) as source:
               # Read the entire audio file
               audio_data = r.record(source)
-              text = r.recognize_google(audio_data)
+              text = r.recognize_sphinx(audio_data)
           return text
       except sr.UnknownValueError:
           return "Speech recognition could not understand audio"
