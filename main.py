@@ -12,7 +12,7 @@ from pathlib import Path
 
 
 
-st.subtitle("TTS & STT Demos")
+st.subheader("TTS & STT Demos")
 st.markdown("Choose what you want to do:")
 tab1, tab2 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded"])
 
