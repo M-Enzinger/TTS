@@ -55,6 +55,7 @@ with tab1:
   if (execute_tts and (len(text_val) >= 1)):
     #calling text to speech function
     tts = m_tts(text_val, language)
+    st.warning("Please wait...")
     
     #Save the audio file to a specific path
     tts_temp_audio = os.path.join(tempfile.gettempdir(), "output.mp3")
@@ -122,6 +123,7 @@ with tab2:
     
     #transcribing
     stt_result = stt_model.transcribe(tmp_file.name)
+    st.warning("Please wait...")
     
     #returning results to user
     st.success("Success! Upload a new file and/or change the model and hit 'Transribe' again for a new prediction!")
