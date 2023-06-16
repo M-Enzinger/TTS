@@ -65,7 +65,10 @@ with tab2:
         return "Speech recognition could not understand audio"
     except sr.RequestError as e:
         return f"Could not request results from Google Speech Recognition service: {e}"
+  st.title("Speech-to-Text with SpeechRecognition")
 
+  # Audio file upload
+  uploaded_file = st.file_uploader("Upload an audio file", type=["wav", "mp3"])
   if uploaded_file:
     st.audio(uploaded_file, format='audio/wav')
 
