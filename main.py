@@ -4,7 +4,7 @@ import tempfile
 import os
 import speech_recognition as sr
 from pydub import AudioSegment
-from ffprobe import FFProbe
+
 
 
 st.title("TTS & STT Demos")
