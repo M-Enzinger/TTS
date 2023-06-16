@@ -122,8 +122,8 @@ with tab2:
     stt_model = whisper.load_model(stt_model_dict[stt_model_option])
     
     #transcribing
-    stt_result = stt_model.transcribe(tmp_file.name)
     st.warning("Please wait...")
+    stt_result = stt_model.transcribe(tmp_file.name)
     
     #returning results to user
     st.success("Success! Upload a new file and/or change the model and hit 'Transribe' again for a new prediction!")
