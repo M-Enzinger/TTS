@@ -28,7 +28,7 @@ with tab1:
   col1, col2, col3 = st.columns(3)
   with col2:
     execute = st.button('Convert to Speech')   
-  if (execute and (text_val.len <= 0)):
+  if (execute and (text_val.len() <= 0)):
     tts = m_tts(text_val, language)
     st.success("Success: Listen to your results!")
     # Save the audio file to a specific path
