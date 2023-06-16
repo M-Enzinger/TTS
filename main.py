@@ -55,7 +55,7 @@ with tab1:
 
 
 with tab2:
-  st.subtitle("Speech To Text Pre-Recorded")
+  st.subheader("Speech To Text Pre-Recorded")
   st.info("Step 1: Upload a recorded audio file; You can also download the generated file from the 'Text To Speech' tap!")
   uploaded_file2 = st.file_uploader("Upload an audio file2", type=["wav", "mp3"])
   st.info("Step 2: Choose a model")
