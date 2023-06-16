@@ -44,8 +44,6 @@ with tab1:
 
   elif (text_val is None):
     st.error("Enter Text First!")    
-  else:
-    st.error("Error: result == null :(")
 
 
 with tab2:
