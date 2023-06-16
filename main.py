@@ -39,7 +39,7 @@ with tab1:
     execute = st.button('Convert to Speech')   
   if (execute and (len(text_val) >= 1)):
     tts = m_tts(text_val, language)
-    st.success("Success: Listen to your results or download it as a mp3!")
+    st.success("Success: Listen to your results or download it as a mp3! You can edit your text and click on the button again to convert a new text.")
     # Save the audio file to a specific path
     temp_audio = os.path.join(tempfile.gettempdir(), "output.mp3")
     tts.save(temp_audio)
@@ -70,8 +70,8 @@ with tab2:
   st.info("Step 2: Choose a model")
   model_option = st.selectbox(
     "Select you prefered Model (If you need help deciding for a model press 'Help me decide')",
-    ('Tiny', 'Base', 'Small', 'Medium', 'Large'))
-  model_dict = {'Tiny':'tiny', 'Base':'base', 'Small':'small', 'Medium':'medium', 'Large':"large"}
+    ('Tiny', 'Base', 'Small', 'Medium'))
+  model_dict = {'Tiny':'tiny', 'Base':'base', 'Small':'small', 'Medium':'medium'}
   col1, col2, col3 = st.columns(3)
   with col2:
     if st.button('Help me decide'):
@@ -86,7 +86,7 @@ with tab2:
             fp.write_bytes(uploaded_file2.getvalue())
     model = whisper.load_model(model_dict[model_option])
     result = model.transcribe(tmp_file.name)
-    st.success("Success! Here is your result:")
+    st.success("Success! Upload a new file and/or change the model and hit 'Transribe' again for a new prediction!")
     st.markdown(result["text"])
     
 
