@@ -4,3 +4,4 @@ SpeechRecognition
 pydub
 ffmpeg-python
 pocketsphinx
+openai-whisper
