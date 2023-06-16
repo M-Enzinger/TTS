@@ -72,7 +72,7 @@ with tab2:
   model_dict = {'Tiny':'tiny', 'Base':'base', 'Small':'small', 'Medium':'medium', 'Large':"large"}
   col1, col2, col3 = st.columns(3)
   with col2:
-    if st.help_model_decide('Help me decide'):
+    if st.button('Help me decide'):
       image = Image.open('files/help_me_decide_model.jpg')
   st.info("Step 3: Click 'Transcribe'")
   col1, col2, col3 = st.columns(3)
