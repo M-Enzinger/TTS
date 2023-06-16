@@ -3,3 +3,4 @@ gtts
 SpeechRecognition
 pydub
 ffmpeg-python
+pocketsphinx
