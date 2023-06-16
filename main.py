@@ -79,7 +79,7 @@ with tab2:
   st.title("Speech-to-Text with pydub and SpeechRecognition")
 
   # Audio file upload
-  uploaded_file = st.file_uploader("Upload an audio file", type=["wav", "mp3"])
+  uploaded_file = st.file_uploader("Upload an audio file", type=["wav", "mp3"], accept_multiple_files=False)
 
   # Perform speech-to-text conversion and display the result
   if uploaded_file:
