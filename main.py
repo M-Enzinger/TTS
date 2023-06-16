@@ -101,6 +101,6 @@ with tab3:
     with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
             fp = Path(tmp_file.name)
             fp.write_bytes(uploaded_file2.getvalue())
-    result = model.transcribetmp_file.name)
+    result = model.transcribe(tmp_file.name)
     print(result["text"])
   
