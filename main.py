@@ -27,7 +27,7 @@ with tab1:
       with tempfile.NamedTemporaryFile(delete=True) as temp:
           temp_audio = temp.name
           result.save(temp_audio)
-      audio_file = open(result, 'rb')
+      audio_file = open(temp_audio, 'rb')
       audio_bytes = audio_file.read()
       st.audio(audio_bytes, format='audio/ogg')
     
