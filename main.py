@@ -94,6 +94,8 @@ with tab3:
   st.header("Speech To Text Pre-Recorded 2")
   model = whisper.load_model("base")
   uploaded_file2 = st.file_uploader("Upload an audio file2", type=["wav", "mp3"])
-  result = model.transcribe(uploaded_file2)
-  print(result["text"])
+  execute_stt = st.button("Transcribe")
+  if execute_stt:
+    result = model.transcribe(uploaded_file2)
+    print(result["text"])
   
