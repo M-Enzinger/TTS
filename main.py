@@ -16,7 +16,7 @@ with tab1:
   st.info("Step 1: Type in your text")
   text_val = st.text_area('Text to convert to speech')
   language = 'de'
-  st.info("Step 2: Press 'Convert To Speech')
+  st.info("Step 2: Press 'Convert To Speech'")
   if st.button('Convert to Speech'):
     result = tts(text_val, language)
     if result != null:
