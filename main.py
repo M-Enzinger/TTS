@@ -12,9 +12,9 @@ from pathlib import Path
 
 
 
-st.title("TTS & STT Demos")
+st.subtitle("TTS & STT Demos")
 st.markdown("Choose what you want to do:")
-tab1, tab2, tab3 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded", "Speech To Text Live"])
+tab1, tab2 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded"])
 
 with tab1:
   def m_tts(text_val, language):
@@ -55,68 +55,37 @@ with tab1:
 
 
 with tab2:
-  st.header("Speech To Text Pre-Recorded 2")
-  model = whisper.load_model("base")
+  st.subtitle("Speech To Text Pre-Recorded")
+  st.info("Step 1: Upload a recorded audio file; You can also download the generated file from the 'Text To Speech' tap!")
   uploaded_file2 = st.file_uploader("Upload an audio file2", type=["wav", "mp3"])
-  execute_stt = st.button("Transcribe")
+  st.info("Step 2: Choose a model")
+  model_option = st.selectbox(
+    "Select you prefered Model (If you need help deciding for a model press 'Help me decide')",
+    ('Tiny', 'Base', 'Small', 'Medium', 'Large'))
+  model_dict = {'Tiny':'tiny', 'Base':'base', 'Small':'small', 'Medium':'medium', 'Large':"large"}
+  col1, col2, col3 = st.columns(3)
+  with col2:
+    if st.help_model_decide('Help me decide'):
+      image = Image.open('files/help_me_decide_model.jpg')
+  st.info("Step 3: Click 'Transcribe'")
+  col1, col2, col3 = st.columns(3)
+  with col2:
+    execute_stt = st.button("Transcribe")
   if execute_stt:
     with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
             fp = Path(tmp_file.name)
             fp.write_bytes(uploaded_file2.getvalue())
+    model = whisper.load_model(model_dict[model_option])
     result = model.transcribe(tmp_file.name)
-    st.markdown(result["text"])
+    st.success("Success! Here is your result:")
+    st.code(result["text"])
     
-with tab3:
-  st.header("Speech To Text Live")
-  def transcribe_audio(audio_file):
-    model = whisper.load_model("base")
-    result = model.transcribe(audio_file)
-    return result["text"]
 
-  def main():
-      st.header("Speech To Text Live")
+    
+    
+ 
+      
+    
 
-      uploaded_file2 = st.file_uploader("Upload an audio file", type=["wav", "mp3"])
-
-      if uploaded_file2 is not None:
-          audio_file = tempfile.NamedTemporaryFile(delete=False)
-          audio_file.write(uploaded_file2.getvalue())
-          audio_file.close()
-
-      if uploaded_file2 is not None:
-          st.audio(uploaded_file2)
-
-          webrtc_ctx = webrtc_streamer(
-              key="example",
-              audio=False,
-              video=False,
-              client_settings={"is_streamlit_server": True},
-          )
-
-          if webrtc_ctx.audio_receiver:
-              audio_receiver = webrtc_ctx.audio_receiver
-              audio_file_path = Path(audio_file.name)
-
-              with audio_file_path.open("rb") as f:
-                  audio_content = f.read()
-
-              audio_receiver.process_audio(audio_content)
-
-              st.text("Transcription in progress:")
-              st.empty()
-
-              while True:
-                  data = audio_receiver.get_intermediate_text()
-                  if data:
-                      st.text(data)
-
-                  if not audio_receiver.more_data():
-                      break
-
-          if webrtc_ctx.state.playing:
-              st.text("Transcription complete!")
-
-  if __name__ == "__main__":
-      main()
   
   
