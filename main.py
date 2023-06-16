@@ -4,13 +4,9 @@ import tempfile
 
 def tts(text_val, language):
   obj = gTTS(text=text_val, lang=language, slow=False)  
-  return toTempFile(obj)
+  return obj
 
-def toTempFile(obj):
-  with tempfile.NamedTemporaryFile(delete=True) as temp:
-          temp_audio = temp.name
-          obj.save(temp_audio)  
-          return temp_audio
+
   
   
 #GUI
@@ -28,6 +24,9 @@ with tab1:
     result = tts(text_val, language)
     if (result is not None):
       st.success("Success: Listen to your results!")
+      with tempfile.NamedTemporaryFile(delete=True) as temp:
+          temp_audio = temp.name
+          result.save(temp_audio)
       audio_file = open(result, 'rb')
       audio_bytes = audio_file.read()
       st.audio(audio_bytes, format='audio/ogg')
