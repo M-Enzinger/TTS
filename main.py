@@ -28,7 +28,7 @@ with tab1:
     result = tts(text_val, language)
     if (result is not None):
       st.success("Success: Listen to your results!")
-      audio_file = open('result', 'rb')
+      audio_file = open(result, 'rb')
       audio_bytes = audio_file.read()
       st.audio(audio_bytes, format='audio/ogg')
     
