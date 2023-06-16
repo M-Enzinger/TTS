@@ -22,7 +22,6 @@ with tab1:
   #Text to Speech-object function
   def m_tts(text_val, language):
     obj = gTTS(text=text_val, lang=language, slow=False)
-    st.success("Success: Listen to your results or download it as a mp3! You can edit your text and click on the button again to convert a new text.")
     return obj
 
   #users text input
@@ -66,6 +65,7 @@ with tab1:
         tts_audio_bytes = audio_file.read()
 
     #Play the audio in Streamlit
+    st.success("Success: Listen to your results or download it as a mp3! You can edit your text and click on the button again to convert a new text.")
     st.audio(tts_audio_bytes, format='audio/mp3')
     
     #Download the file
