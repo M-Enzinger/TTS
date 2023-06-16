@@ -19,14 +19,14 @@ with tab1:
   st.info("Step 2: Press 'Convert To Speech'")
   if st.button('Convert to Speech'):
     result = tts(text_val, language)
-    if result != null:
+    if (result != null):
       st.success("Success: Listen to your results!")
       #playing the audio
       audio_file = open('myaudio.ogg', 'rb')
       audio_bytes = audio_file.read()
       st.audio(result, format='audio/ogg')
     
-    elif text_val == null:
+    elif (text_val == null):
       st.error("Enter Text First!")    
     else:
       st.error("Error: result == null :(")
