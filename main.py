@@ -8,6 +8,7 @@ import ffmpeg
 import numpy as np
 import whisper
 import soundfile as sf
+from pathlib import Path
 
 
 
