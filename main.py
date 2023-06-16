@@ -42,10 +42,10 @@ with tab1:
     # Play the audio in Streamlit
     st.audio(audio_bytes, format='audio/mp3')
 
-elif (text_val is None):
-  st.error("Enter Text First!")    
-else:
-  st.error("Error: result == null :(")
+  elif (text_val is None):
+    st.error("Enter Text First!")    
+  else:
+    st.error("Error: result == null :(")
 
 
 with tab2:
