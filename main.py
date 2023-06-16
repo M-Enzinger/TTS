@@ -98,7 +98,9 @@ with tab3:
   uploaded_file2 = st.file_uploader("Upload an audio file2", type=["wav", "mp3"])
   execute_stt = st.button("Transcribe")
   if execute_stt:
-    st.markdown(type(uploaded_file2))
-    result = model.transcribe(uploaded_file2)
+    with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+            fp = Path(tmp_file.name)
+            fp.write_bytes(uploaded_file2.getvalue())
+    result = model.transcribetmp_file.name)
     print(result["text"])
   
