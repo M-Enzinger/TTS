@@ -16,7 +16,8 @@ st.subheader("Choose a model to start with")
 tab1, tab2, tab3 = st.tabs(["Google TTS", "Coming Soon", "Coming Soon 2"])
 
 with tab1:
-  st.header("Google Text To Speech")
+  st.subheader("Google Text To Speech")
+  
   st.info("Step 1: Type in your text")
   text_val = st.text_area('Text to convert to speech')
   
