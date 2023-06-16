@@ -21,15 +21,19 @@ with tab1:
   language = 'de'
   st.info("Step 2: Press 'Convert To Speech'")
   if st.button('Convert to Speech'):
-    result = tts(text_val, language)
+    tts = tts(text_val, language)
     if (result is not None):
       st.success("Success: Listen to your results!")
-      with tempfile.NamedTemporaryFile(delete=True) as temp:
-          temp_audio = temp.name
-          result.save(temp_audio)
-      audio_file = open(temp_audio, 'rb')
-      audio_bytes = audio_file.read()
-      st.audio(audio_bytes, format='audio/ogg')
+      # Save the audio file to a specific path
+      temp_audio = os.path.join(tempfile.gettempdir(), "output.mp3")
+      tts.save(temp_audio)
+
+      # Read the audio file as bytes
+      with open(temp_audio, "rb") as audio_file:
+          audio_bytes = audio_file.read()
+
+      # Play the audio in Streamlit
+      st.audio(audio_bytes, format='audio/mp3')
     
     elif (text_val is None):
       st.error("Enter Text First!")    
