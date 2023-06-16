@@ -3,6 +3,7 @@ import streamlit as st
 import tempfile
 import os
 import speech_recognition as sr
+import pydub
 
 st.title("TTS & STT Demos")
 st.markdown("Choose what you want to do:")
@@ -58,25 +59,31 @@ with tab2:
 
     # Perform speech recognition
     try:
-        text = r.recognize_google(audio)
+        text = r.recognize_sphinx(audio)
         return text
     except sr.UnknownValueError:
         return "Speech recognition could not understand audio"
     except sr.RequestError as e:
         return f"Could not request results from Google Speech Recognition service: {e}"
 
-  # Streamlit app
-  st.title("Speech-to-Text with SpeechRecognition")
-
-  # Audio file upload
-  uploaded_file = st.file_uploader("Upload an audio file", type=["wav", "mp3"])
-
-  # Perform speech-to-text conversion and display the result
-  if uploaded_file:
+   if uploaded_file:
       st.audio(uploaded_file, format='audio/wav')
 
       if st.button("Transcribe"):
-          text_output = transcribe_speech(uploaded_file)
+          if uploaded_file.name.endswith(".mp3"):
+              # Convert MP3 to WAV
+              with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as temp_wav:
+                  temp_wav_path = temp_wav.name
+                  audio = pydub.AudioSegment.from_mp3(uploaded_file)
+                  audio.export(temp_wav_path, format="wav")
+
+              text_output = transcribe_speech(temp_wav_path)
+
+              # Delete temporary WAV file
+              os.remove(temp_wav_path)
+          else:
+              text_output = transcribe_speech(uploaded_file)
+
           st.write("Transcription:")
           st.write(text_output)
 
