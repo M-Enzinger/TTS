@@ -13,6 +13,7 @@ from pathlib import Path
 
 st.subheader("TTS & STT Demos")
 st.markdown("Choose what you want to do:")
+st.markdown("Link to Github Repository: https://github.com/M-Enzinger/TTS")
 tab1, tab2 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded"])
 
 #text to speech section
