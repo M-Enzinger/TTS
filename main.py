@@ -50,7 +50,7 @@ with tab1:
 
 
 with tab2:
-  FFProbe.set_ffprobe_path('/path/to/ffprobe')
+  FFProbe.executable = '/path/to/ffprobe'
   st.header("Speech To Text Pre-Recorded")
   def transcribe_speech(audio_file):
     # Initialize the recognizer
