@@ -4,6 +4,8 @@ import tempfile
 import os
 import speech_recognition as sr
 import pydub
+from ffprobe import FFProbe
+
 
 st.title("TTS & STT Demos")
 st.markdown("Choose what you want to do:")
