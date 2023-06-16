@@ -19,12 +19,15 @@ with tab1:
   st.header("Google Text To Speech")
   st.info("Step 1: Type in your text")
   text_val = st.text_area('Text to convert to speech')
+  
+  st.info("Step 2: Choose your language")
   language_option = st.selectbox(
     'To which language to you want to convert to? (more possible)',
     ('English', 'German', 'French', 'Spanish'))
   lang_dict = {'English':'en', 'German':'de', 'French':'fr', 'Spanish':'es'}
   language = lang_dict[language_option]
-  st.info("Step 2: Press 'Convert To Speech'")
+  
+  st.info("Step 3: Press 'Convert To Speech'")
   col1, col2, col3 = st.columns(3)
   with col2:
     execute = st.button('Convert to Speech')   
