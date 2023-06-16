@@ -53,7 +53,7 @@ with tab1:
     
     st.download_button(
     label="Download Audio",
-    data=temp_audio,
+    data=audio_bytes,
     file_name='Generated_Audio.mp3',
     mime='mp3',
     )
