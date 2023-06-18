@@ -152,7 +152,7 @@ with tab3:
     ('Tiny Model', 'Base Model'), index=1)
   
   #converting model selection
-  stt_model_dict = {'Tiny':'tiny', 'Base':'base'}
+  stt_model_dict = {'Tiny Model':'tiny', 'Base Model':'base'}
 
   #user chooses snipet unique time
   st.info("Step 3: Choose the unique time of each snippet. Overlapping time not included.")
