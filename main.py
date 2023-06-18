@@ -141,9 +141,9 @@ with tab3:
 
     with wave.open(audio_livestt) as mywav:
         duration_seconds = mywav.getnframes()
-
-    for n in range(duration_seconds):
-      st.markdown(n)
+    st.markdown(duration_seconds)
+    #for n in range(duration_seconds):
+     # st.markdown(n)
     t1 = n * 1000 #Works in milliseconds
     t2 = (n+4) * 1000
     newAudio = AudioSegment.from_wav(audio_livestt)
