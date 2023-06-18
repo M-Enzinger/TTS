@@ -151,7 +151,7 @@ with tab3:
 
   st.info("Step 5: Choose overlapping time")
   overlapping = st.slider(
-    'Select a range of values', 0, 2, 0.5, 0.1)
+    'Select a range of values', 0.0, 2.0, 0.5, 0.1)
 
   st.info("Step 4: Click 'Transcribe'")
   col1, col2, col3 = st.columns(3)
