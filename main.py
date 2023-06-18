@@ -139,21 +139,32 @@ with tab3:
         duration = frames / float(frame_rate)
     return duration
     
-  st.subheader("Live Transcribtion")
+  st.subheader("Live Transcribtion Simulation")
+  st.info("Step 1: Upload a Wav file")
   audio_livestt = st.file_uploader("Upload an audio file2", type=["wav"])
-  t1=0
-  t2=30
-  if st.button('blabla'):
+  st.info("Step 2: Choose a model")
+  stt_model_option = st.selectbox(
+    "Select you prefered Model (If you need help deciding for a model press 'Help me decide'). Small, Medium & Large are exceeding the free cloud ressources.",
+    ('Tiny', 'Base'), index=1)
+  #converting model selection
+  stt_model_dict = {'Tiny':'tiny', 'Base':'base'}
+
+  st.info("Step 3: Click 'Transcribe'")
+  col1, col2, col3 = st.columns(3)
+  with col2:
+    live_stt_execute = st.button('blabla')
+  if (live_stt_execute):
     audio_duration = get_wav_duration(audio_livestt)
-    st.markdown(audio_duration)
     n_steps = int(audio_duration / 4) + 1
-    st.markdown(n_steps)
+    overlapping = 0.5
+    st.success('Duration of the audio file: ' + str(audio_duration) + '. Amount of splits which are separetly analysed: ' + str(n_steps) + '. Overlapping time: ' + str(overlapping) + '.')
     for n in range(n_steps):
       t1 = n*4*1000 #Works in milliseconds
-      t2 = (n*4+4.5) * 1000
+      t2 = (n*4+4+overlapping) * 1000
       newAudio = AudioSegment.from_wav(audio_livestt)
       newAudio = newAudio[t1:t2]
       newAudio_temp = os.path.join(tempfile.gettempdir(), "output.wav")
       newAudio.export(newAudio_temp, format="wav") #Exports to a wav file in the current path.
+      st.subheader('Audio snippet ' + str(n+1) + ' of ' + str(n_steps) + '.')
       st.audio(newAudio_temp, format='wav')
  
