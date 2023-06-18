@@ -132,16 +132,19 @@ with tab2:
     
 
 with tab3:
+  def get_wav_duration(file_path):
+    with wave.open(file_path, 'rb') as wav_file:
+        frames = wav_file.getnframes()
+        frame_rate = wav_file.getframerate()
+        duration = frames / float(frame_rate)
+    return duration
+    
   st.subheader("Live Transcribtion")
   audio_livestt = st.file_uploader("Upload an audio file2", type=["wav"])
   t1=0
   t2=30
   if st.button('blabla'):
-
-
-    with wave.open(audio_livestt) as mywav:
-        duration_seconds = mywav.getnframes()
-    st.markdown(duration_seconds)
+    st.markdown(get_wav_duration(audio_livestt)
     #for n in range(duration_seconds):
      # st.markdown(n)
     t1 = n * 1000 #Works in milliseconds
