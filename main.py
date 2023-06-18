@@ -151,7 +151,7 @@ with tab3:
 
   st.info("Step 3: Choose the unique time of each snippet. Overlapping time not included.")
   selected_duration = st.slider(
-    'Select a range of values', 0.0, 20.0, 5.0, 0.1)
+    'Select a range of values', 0.0, 25.0, 5.0, 0.1)
   
   st.info("Step 4: Choose overlapping time")
   overlapping = st.slider(
