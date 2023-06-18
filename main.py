@@ -149,8 +149,8 @@ with tab3:
     n_steps = int(audio_duration / 5) + 1
     st.markdown(n_steps)
     for n in range(n_steps):
-      t1 = n * 1000 #Works in milliseconds
-      t2 = (n+5.5) * 1000
+      t1 = n*5 1000 #Works in milliseconds
+      t2 = (n*5+5.5) * 1000
       newAudio = AudioSegment.from_wav(audio_livestt)
       newAudio = newAudio[t1:t2]
       newAudio_temp = os.path.join(tempfile.gettempdir(), "output.wav")
