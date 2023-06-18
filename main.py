@@ -10,6 +10,7 @@ import whisper
 import soundfile as sf
 from pathlib import Path
 from PIL import Image
+import wave
 
 
 st.subheader("TTS & STT Demos")
@@ -136,12 +137,17 @@ with tab3:
   t1=0
   t2=30
   if st.button('blabla'):
-    t1 = t1 * 1000 #Works in milliseconds
-    t2 = t2 * 1000
-    
-    newAudio = AudioSegment.from_wav(audio_livestt)
-    newAudio = newAudio[t1:t2]
-    newAudio_temp = os.path.join(tempfile.gettempdir(), "output.wav")
-    newAudio.export(newAudio_temp, format="wav") #Exports to a wav file in the current path.
-    st.audio(newAudio_temp, format='wav')
+
+
+    with wave.open("myaudio.wav") as mywav:
+        duration_seconds = mywav.getnframes()
+
+    for n in range(0, duration_seconds):
+      t1 = n * 1000 #Works in milliseconds
+      t2 = (n+4) * 1000
+      newAudio = AudioSegment.from_wav(audio_livestt)
+      newAudio = newAudio[t1:t2]
+      newAudio_temp = os.path.join(tempfile.gettempdir(), "output.wav")
+      newAudio.export(newAudio_temp, format="wav") #Exports to a wav file in the current path.
+      st.audio(newAudio_temp, format='wav')
  
