@@ -148,6 +148,7 @@ with tab3:
     #for n in range(duration_seconds):
      # st.markdown(n)
     #t1 = n * 1000 #Works in milliseconds
+    n=0
     t2 = (n+4) * 1000
     newAudio = AudioSegment.from_wav(audio_livestt)
     newAudio = newAudio[t1:t2]
