@@ -144,15 +144,14 @@ with tab3:
   t1=0
   t2=30
   if st.button('blabla'):
-    st.markdown(get_wav_duration(audio_livestt))
-    #for n in range(duration_seconds):
-     # st.markdown(n)
-    #t1 = n * 1000 #Works in milliseconds
-    n=0
-    t2 = (n+4) * 1000
-    newAudio = AudioSegment.from_wav(audio_livestt)
-    newAudio = newAudio[t1:t2]
-    newAudio_temp = os.path.join(tempfile.gettempdir(), "output.wav")
-    newAudio.export(newAudio_temp, format="wav") #Exports to a wav file in the current path.
-    st.audio(newAudio_temp, format='wav')
+    audio_duration = get_wav_duration(audio_livestt)
+    n_steps = (audio_duration % 4) + 1
+    for n in range(n_steps):
+      t1 = n * 1000 #Works in milliseconds
+      t2 = (n+5) * 1000
+      newAudio = AudioSegment.from_wav(audio_livestt)
+      newAudio = newAudio[t1:t2]
+      newAudio_temp = os.path.join(tempfile.gettempdir(), "output.wav")
+      newAudio.export(newAudio_temp, format="wav") #Exports to a wav file in the current path.
+      st.audio(newAudio_temp, format='wav')
  
