@@ -135,10 +135,11 @@ with tab3:
   audio_livestt = st.file_uploader("Upload an audio file2", type=["wav"])
   t1=0
   t2=2
-  t1 = t1 * 1000 #Works in milliseconds
-  t2 = t2 * 1000
-  newAudio = AudioSegment.from_wav(audio_livestt)
-  newAudio = newAudio[t1:t2]
-  newAudio.export('newSong.wav', format="wav") #Exports to a wav file in the current path.
-  st.audio(tts_audio_bytes, format='audio/wav')
+  if st.button('blabla'):
+    t1 = t1 * 1000 #Works in milliseconds
+    t2 = t2 * 1000
+    newAudio = AudioSegment.from_wav(audio_livestt)
+    newAudio = newAudio[t1:t2]
+    newAudio.export('newSong.wav', format="wav") #Exports to a wav file in the current path.
+    st.audio(tts_audio_bytes, format='audio/wav')
  
