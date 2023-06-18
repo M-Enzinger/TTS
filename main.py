@@ -140,6 +140,6 @@ with tab3:
     t2 = t2 * 1000
     newAudio = AudioSegment.from_wav(audio_livestt)
     newAudio = newAudio[t1:t2]
-    newAudio.export('newSong.wav', format="wav") #Exports to a wav file in the current path.
-    st.audio(tts_audio_bytes, format='audio/wav')
+    #newAudio.export('newSong.wav', format="wav") #Exports to a wav file in the current path.
+    st.audio(newAudio, format='audio/wav')
  
