@@ -139,7 +139,7 @@ with tab3:
   if st.button('blabla'):
 
 
-    with wave.open("myaudio.wav") as mywav:
+    with wave.open(audio_livestt) as mywav:
         duration_seconds = mywav.getnframes()
 
     for n in range(0, duration_seconds):
