@@ -149,24 +149,29 @@ with tab3:
   #converting model selection
   stt_model_dict = {'Tiny':'tiny', 'Base':'base'}
 
-  st.info("Step 5: Choose overlapping time")
+  st.info("Step 3: Choose the unique time of each snippet. Overlapping time not included.")
+  selected_duration = st.slider(
+    'Select a range of values', 0.0, 20.0, 5, 0.1)
+  
+  st.info("Step 4: Choose overlapping time")
   overlapping = st.slider(
     'Select a range of values', 0.0, 2.0, 0.5, 0.1)
 
-  st.info("Step 4: Click 'Transcribe'")
+  st.info("Step 5: Click 'Transcribe'")
   col1, col2, col3 = st.columns(3)
   with col2:
     live_stt_execute = st.button('blabla')
   if (live_stt_execute):
     audio_duration = get_wav_duration(audio_livestt)
-    n_steps = int(audio_duration / 4) + 1
+    n_steps = int(audio_duration / selected_duration) + 1
     st.success('Duration of the audio file: ' + str(audio_duration) + ' seconds.')
+    st.success('Unique duration of each audio file of the audio file: ' + str(selected_duration) + ' seconds. Overlapping time not included. Last one might be shorter.')
     st.success('Amount of splits which are separetly analysed: ' + str(n_steps) + '.')
-    st.success('Overlapping time: ' + str(overlapping) + '.')
+    st.success('Overlapping time per split: ' + str(overlapping) + '.')
     
     for n in range(n_steps):
-      t1 = n*4*1000 #Works in milliseconds
-      t2 = (n*4+4+overlapping) * 1000
+      t1 = n*selected_duration*1000 #Works in milliseconds
+      t2 = ((n+1)*selected_duration+overlapping) * 1000
       newAudio = AudioSegment.from_wav(audio_livestt)
       newAudio = newAudio[t1:t2]
       newAudio_temp = os.path.join(tempfile.gettempdir(), "output.wav")
