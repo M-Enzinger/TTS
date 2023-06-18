@@ -144,20 +144,26 @@ with tab3:
   audio_livestt = st.file_uploader("Upload an audio file2", type=["wav"])
   st.info("Step 2: Choose a model")
   stt_model_option = st.selectbox(
-    "Select you prefered Model (If you need help deciding for a model press 'Help me decide'). Small, Medium & Large are exceeding the free cloud ressources.",
+    "Select you prefered Model. Small, Medium & Large are exceeding the free cloud ressources.",
     ('Tiny Model', 'Base Model'), index=1)
   #converting model selection
   stt_model_dict = {'Tiny':'tiny', 'Base':'base'}
 
-  st.info("Step 3: Click 'Transcribe'")
+  st.info("Step 5: Choose overlapping time")
+  overlapping = st.slider(
+    'Select a range of values', 0, 2, 0.5, 0.1)
+
+  st.info("Step 4: Click 'Transcribe'")
   col1, col2, col3 = st.columns(3)
   with col2:
     live_stt_execute = st.button('blabla')
   if (live_stt_execute):
     audio_duration = get_wav_duration(audio_livestt)
     n_steps = int(audio_duration / 4) + 1
-    overlapping = 0.5
-    st.success('Duration of the audio file: ' + str(audio_duration) + '. Amount of splits which are separetly analysed: ' + str(n_steps) + '. Overlapping time: ' + str(overlapping) + '.')
+    st.success('Duration of the audio file: ' + str(audio_duration) + ' seconds.')
+    st.success('Amount of splits which are separetly analysed: ' + str(n_steps) + '.')
+    st.success('Overlapping time: ' + str(overlapping) + '.')
+    
     for n in range(n_steps):
       t1 = n*4*1000 #Works in milliseconds
       t2 = (n*4+4+overlapping) * 1000
