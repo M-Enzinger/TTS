@@ -134,7 +134,7 @@ with tab3:
   st.subheader("Live Transcribtion")
   audio_livestt = st.file_uploader("Upload an audio file2", type=["wav"])
   t1=0
-  t2=2
+  t2=30
   if st.button('blabla'):
     t1 = t1 * 1000 #Works in milliseconds
     t2 = t2 * 1000
