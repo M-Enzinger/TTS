@@ -143,5 +143,5 @@ with tab3:
     newAudio = newAudio[t1:t2]
     newAudio_temp = os.path.join(tempfile.gettempdir(), "output.wav")
     newAudio.export(newAudio_temp, format="wav") #Exports to a wav file in the current path.
-    st.audio(newAudio, format='audio/wav')
+    st.audio(newAudio, format='wav')
  
