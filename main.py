@@ -144,7 +144,7 @@ with tab3:
   t1=0
   t2=30
   if st.button('blabla'):
-    st.markdown(get_wav_duration(audio_livestt)
+    st.markdown(get_wav_duration(audio_livestt))
     #for n in range(duration_seconds):
      # st.markdown(n)
     #t1 = n * 1000 #Works in milliseconds
