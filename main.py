@@ -145,7 +145,7 @@ with tab3:
   t2=30
   if st.button('blabla'):
     audio_duration = get_wav_duration(audio_livestt)
-    n_steps = (audio_duration % 4) + 1
+    n_steps = int((audio_duration % 4) + 1)
     for n in range(n_steps):
       t1 = n * 1000 #Works in milliseconds
       t2 = (n+5) * 1000
