@@ -138,8 +138,10 @@ with tab3:
   if st.button('blabla'):
     t1 = t1 * 1000 #Works in milliseconds
     t2 = t2 * 1000
+    
     newAudio = AudioSegment.from_wav(audio_livestt)
     newAudio = newAudio[t1:t2]
-    #newAudio.export('newSong.wav', format="wav") #Exports to a wav file in the current path.
+    newAudio_temp = os.path.join(tempfile.gettempdir(), "output.wav")
+    newAudio.export(newAudio_temp, format="wav") #Exports to a wav file in the current path.
     st.audio(newAudio, format='audio/wav')
  
