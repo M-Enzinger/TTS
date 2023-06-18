@@ -16,7 +16,7 @@ import wave
 st.subheader("TTS & STT Demos von Maximilian")
 st.markdown("Choose what you want to do:")
 st.markdown("Link to Github Repository: https://github.com/M-Enzinger/TTS")
-tab1, tab2, tab3, tab4 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded", "Live Transcribtion", "My Code"])
+tab1, tab2, tab3, tab4 = st.tabs(["Text To Speech", "Speech To Text Pre-Recorded", "Speech To Text Live", "My Code"])
 
 #text to speech section
 with tab1:
@@ -141,7 +141,7 @@ with tab3:
     return duration
 
   #file upload
-  st.subheader("Live Transcribtion Simulation")
+  st.subheader("Speech To Text Live Simulation")
   st.info("Step 1: Upload a Wav file")
   audio_livestt = st.file_uploader("Upload an audio file2", type=["wav"])
 
