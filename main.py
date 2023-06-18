@@ -132,50 +132,80 @@ with tab2:
     
 
 with tab3:
+  #method to het duration of audio file
   def get_wav_duration(file_path):
     with wave.open(file_path, 'rb') as wav_file:
         frames = wav_file.getnframes()
         frame_rate = wav_file.getframerate()
         duration = frames / float(frame_rate)
     return duration
-    
+
+  #file upload
   st.subheader("Live Transcribtion Simulation")
   st.info("Step 1: Upload a Wav file")
   audio_livestt = st.file_uploader("Upload an audio file2", type=["wav"])
+
+  #user chooses model
   st.info("Step 2: Choose a model")
   stt_model_option = st.selectbox(
     "Select you prefered Model. Small, Medium & Large are exceeding the free cloud ressources.",
     ('Tiny Model', 'Base Model'), index=1)
+  
   #converting model selection
   stt_model_dict = {'Tiny':'tiny', 'Base':'base'}
 
+  #user chooses snipet unique time
   st.info("Step 3: Choose the unique time of each snippet. Overlapping time not included.")
   selected_duration = st.slider(
-    'Select a range of values', 0.0, 25.0, 5.0, 0.1)
-  
+    'Select a range of values', 0.0, 20.0, 5.0, 0.1)
+
+  #user chooses overlapping time
   st.info("Step 4: Choose overlapping time")
   overlapping = st.slider(
     'Select a range of values', 0.0, 2.0, 0.5, 0.1)
 
+  #user requests transcription
   st.info("Step 5: Click 'Transcribe'")
   col1, col2, col3 = st.columns(3)
   with col2:
     live_stt_execute = st.button('blabla')
+
+  #check whether user requested transcription
   if (live_stt_execute):
+    #get audio duration
     audio_duration = get_wav_duration(audio_livestt)
+
+    #calculate amount of splits and provide feedback to user
     n_steps = int(audio_duration / selected_duration) + 1
     st.success('Duration of the audio file: ' + str(audio_duration) + ' seconds.')
     st.success('Unique duration of each audio file of the audio file: ' + str(selected_duration) + ' seconds. Overlapping time not included. Last one might be shorter.')
     st.success('Amount of splits which are separetly analysed: ' + str(n_steps) + '.')
-    st.success('Overlapping time per split: ' + str(overlapping) + '.')
-    
+    st.success('Overlapping time per split: ' + str(overlapping) + ' seconds.')
+
+    #splitting and trancribing according to the amount of splits
     for n in range(n_steps):
+      #timestamp of the beginning of the snipe
       t1 = n*selected_duration*1000 #Works in milliseconds
+
+      #timestamp of the end of the snipet, including the overlapping time
       t2 = ((n+1)*selected_duration+overlapping) * 1000
+
+      #cutting the audio and extraxting the snippet
       newAudio = AudioSegment.from_wav(audio_livestt)
       newAudio = newAudio[t1:t2]
       newAudio_temp = os.path.join(tempfile.gettempdir(), "output.wav")
       newAudio.export(newAudio_temp, format="wav") #Exports to a wav file in the current path.
+
+      #showing an audio player
       st.subheader('Audio snippet ' + str(n+1) + ' of ' + str(n_steps) + '.')
       st.audio(newAudio_temp, format='wav')
- 
+
+      #transcribing the snippet
+      #loading preselected model using the dictionary
+      live_stt_model = whisper.load_model(stt_model_dict[stt_model_option])
+      
+      #transcribing
+      live_stt_result = live_stt_model.transcribe(newAudio_temp)
+      
+      #returning results to user
+      st.markdown(live_stt_result["text"])
